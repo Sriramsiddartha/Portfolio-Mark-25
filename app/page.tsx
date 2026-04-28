@@ -1,65 +1,182 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState, useEffect } from "react";
+import Hero from "@/components/Hero";
+import ProjectCard from "@/components/ProjectCard";
+import CertificateCard from "@/components/CertificateCard";
+import Modal from "@/components/Modal";
+import AboutSection from "@/components/AboutSection";
+import ExperienceSection from "@/components/ExperienceSection";
+import EducationSection from "@/components/EducationSection";
+import SkillsSection from "@/components/SkillsSection";
+import HackathonsSection from "@/components/HackathonsSection";
+import ContactSection from "@/components/ContactSection";
+import SectionWrapper from "@/components/SectionWrapper";
+import { 
+  localProjects, localCertificates, localSiteContent, localExperience, localEducation, localHackathons,
+  type Project, type Certificate, type SiteContent, type Experience, type Education, type Hackathon 
+} from "@/lib/data";
+
+// Try to load from Firebase; fall back to empty arrays
+async function loadProjects(): Promise<Project[]> {
+  try {
+    const { fetchProjects } = await import("@/lib/firestore");
+    return await fetchProjects();
+  } catch {
+    return [];
+  }
+}
+
+async function loadCertificates(): Promise<Certificate[]> {
+  try {
+    const { fetchCertificates } = await import("@/lib/firestore");
+    return await fetchCertificates();
+  } catch {
+    return [];
+  }
+}
+
+async function loadSiteContent(): Promise<SiteContent> {
+  try {
+    const { fetchSiteContent } = await import("@/lib/firestore");
+    const data = await fetchSiteContent();
+    return data || localSiteContent;
+  } catch {
+    return localSiteContent;
+  }
+}
+
+async function loadExperience(): Promise<Experience[]> {
+  try {
+    const { fetchExperience } = await import("@/lib/firestore");
+    return await fetchExperience();
+  } catch {
+    return [];
+  }
+}
+
+async function loadEducation(): Promise<Education[]> {
+  try {
+    const { fetchEducation } = await import("@/lib/firestore");
+    return await fetchEducation();
+  } catch {
+    return [];
+  }
+}
+
+async function loadHackathons(): Promise<Hackathon[]> {
+  try {
+    const { fetchHackathons } = await import("@/lib/firestore");
+    return await fetchHackathons();
+  } catch {
+    return [];
+  }
+}
+
+export default function HomePage() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const [siteContent, setSiteContent] = useState<SiteContent>(localSiteContent);
+  const [experience, setExperience] = useState<Experience[]>([]);
+  const [education, setEducation] = useState<Education[]>([]);
+  const [hackathons, setHackathons] = useState<Hackathon[]>([]);
+  const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+
+  useEffect(() => {
+    loadProjects().then(setProjects);
+    loadCertificates().then(setCertificates);
+    loadSiteContent().then(setSiteContent);
+    loadExperience().then(setExperience);
+    loadEducation().then(setEducation);
+    loadHackathons().then(setHackathons);
+  }, []);
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main>
+      {/* Hero */}
+      <Hero data={siteContent} />
+
+      {/* About */}
+      <AboutSection data={siteContent} />
+
+      {/* Experience */}
+      <ExperienceSection data={experience} />
+
+      {/* Education */}
+      <EducationSection data={education} />
+
+      {/* Skills */}
+      <SkillsSection />
+
+      {/* Projects Section */}
+      <section id="projects" className="py-24 px-6 sm:px-10">
+        <div className="max-w-7xl mx-auto">
+          <SectionWrapper>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+              <div>
+                <span className="font-label text-xs uppercase tracking-[0.3em] text-primary mb-2 block">
+                  Selected Work
+                </span>
+                <h2 className="font-headline font-extrabold text-4xl sm:text-5xl tracking-tighter text-coffee-brown">
+                  Projects
+                </h2>
+              </div>
+              <a
+                href="https://github.com/Sriramsiddartha"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-label text-xs uppercase tracking-widest text-on-surface-variant/60 hover:text-primary transition-colors pb-1 border-b border-outline-variant/50"
+              >
+                View all on GitHub ↗
+              </a>
+            </div>
+          </SectionWrapper>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
+            {projects.map((p, i) => (
+              <ProjectCard key={p.id} project={p} index={i} />
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Hackathons */}
+      <HackathonsSection data={hackathons} />
+
+      {/* Certificates Section */}
+      <section id="certificates" className="py-24 px-6 sm:px-10 bg-surface-container-low">
+        <div className="max-w-7xl mx-auto">
+          <SectionWrapper>
+            <div className="mb-12">
+              <span className="font-label text-xs uppercase tracking-[0.3em] text-primary mb-2 block">
+                Achievements
+              </span>
+              <h2 className="font-headline font-extrabold text-4xl sm:text-5xl tracking-tighter text-coffee-brown">
+                Certifications & Badges
+              </h2>
+              <p className="font-body text-sm text-on-surface-variant mt-3">
+                Click any badge to view the full preview.
+              </p>
+            </div>
+          </SectionWrapper>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {certificates.map((cert, i) => (
+              <CertificateCard
+                key={cert.id}
+                certificate={cert}
+                index={i}
+                onClick={setSelectedCert}
+              />
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Contact */}
+      <ContactSection />
+
+      {/* Certificate modal */}
+      <Modal certificate={selectedCert} onClose={() => setSelectedCert(null)} />
+    </main>
   );
 }
