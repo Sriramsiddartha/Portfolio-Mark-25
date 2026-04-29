@@ -6,28 +6,31 @@ import {
   SiPython, SiCplusplus, SiTypescript,
   SiTensorflow, SiPytorch, SiScikitlearn, SiNumpy, SiPandas, SiOpencv,
   SiReact, SiNextdotjs, SiNodedotjs, SiFastapi, SiPostgresql, SiMongodb,
-  SiFirebase, SiGit, SiDocker, SiJupyter
+  SiFirebase, SiGit, SiDocker, SiJupyter,
+  SiLeetcode, SiCodeforces, SiHackerrank, SiCodechef
 } from "react-icons/si";
-import { FaJava, FaDatabase, FaAws } from "react-icons/fa";
+import { FaJava, FaDatabase, FaAws, FaSatellite } from "react-icons/fa";
+import { TbBrain } from "react-icons/tb";
 
 const skills = [
   {
-    cat: "Languages",
+    cat: "Programming",
     items: [
       { name: "Python", icon: SiPython },
       { name: "C++", icon: SiCplusplus },
       { name: "Java", icon: FaJava },
-      { name: "SQL", icon: FaDatabase },
       { name: "TypeScript", icon: SiTypescript },
     ],
   },
   {
-    cat: "Machine Learning",
+    cat: "AI & Data Science",
     items: [
-      { name: "TensorFlow", icon: SiTensorflow },
+      { name: "NumPy", icon: SiNumpy },
+      { name: "Pandas", icon: SiPandas },
+      { name: "Scikit-Learn", icon: SiScikitlearn },
       { name: "PyTorch", icon: SiPytorch },
-      { name: "NLP / LSTM", icon: SiScikitlearn },
-      { name: "Satellite Imagery", icon: SiOpencv },
+      { name: "LLMs / Ollama", icon: TbBrain },
+      { name: "Satellite Imaging", icon: FaSatellite },
     ],
   },
   {
@@ -37,19 +40,27 @@ const skills = [
       { name: "Next.js", icon: SiNextdotjs },
       { name: "Node.js", icon: SiNodedotjs },
       { name: "FastAPI", icon: SiFastapi },
-      { name: "PostgreSQL", icon: SiPostgresql },
-      { name: "MongoDB", icon: SiMongodb },
+      { name: "Git", icon: SiGit },
+      { name: "Docker", icon: SiDocker },
     ],
   },
   {
-    cat: "Cloud & DevOps",
+    cat: "Databases & Cloud",
     items: [
+      { name: "SQL", icon: FaDatabase },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "MongoDB", icon: SiMongodb },
       { name: "AWS", icon: FaAws },
       { name: "Firebase", icon: SiFirebase },
-      { name: "Git", icon: SiGit },
-      { name: "Docker", icon: SiDocker },
-      { name: "Jupyter", icon: SiJupyter },
-      { name: "NumPy/Pandas", icon: SiPandas },
+    ],
+  },
+  {
+    cat: "Problem Solving & DSA",
+    items: [
+      { name: "LeetCode", icon: SiLeetcode },
+      { name: "Codeforces", icon: SiCodeforces },
+      { name: "HackerRank", icon: SiHackerrank },
+      { name: "CodeChef", icon: SiCodechef },
     ],
   },
 ];
@@ -70,7 +81,7 @@ export default function SkillsSection() {
           </div>
         </SectionWrapper>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skills.map((group, gi) => (
             <SectionWrapper key={group.cat} delay={0.1 * gi} className="h-full">
               <div className="h-full bg-soft-cream border border-outline-variant/30 rounded-2xl p-8 hover:shadow-warm-md hover:border-primary/20 transition-all duration-300">

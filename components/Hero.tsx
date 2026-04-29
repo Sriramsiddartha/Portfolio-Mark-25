@@ -96,8 +96,9 @@ export default function Hero({ data }: { data: SiteContent }) {
             View Work
           </a>
           <a
-            href="/Sriram_Siddartha_Resume.pdf"
-            download
+            href="/23211A0523_SriramSiddartha.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-white font-label font-semibold text-sm uppercase tracking-widest hover:brightness-110 hover:scale-105 transition-all duration-200 shadow-warm-md"
           >
             Download Resume

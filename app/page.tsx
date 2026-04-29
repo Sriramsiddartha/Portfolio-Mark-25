@@ -12,18 +12,20 @@ import SkillsSection from "@/components/SkillsSection";
 import HackathonsSection from "@/components/HackathonsSection";
 import ContactSection from "@/components/ContactSection";
 import SectionWrapper from "@/components/SectionWrapper";
+import DSASection from "@/components/DSASection";
+import SpaceSection from "@/components/SpaceSection";
 import { 
-  localProjects, localCertificates, localSiteContent, localExperience, localEducation, localHackathons,
-  type Project, type Certificate, type SiteContent, type Experience, type Education, type Hackathon 
+  localProjects, localCertificates, localSiteContent, localExperience, localEducation, localHackathons, localCodingProfiles, localDSAExperience,
+  type Project, type Certificate, type SiteContent, type Experience, type Education, type Hackathon, type CodingProfile 
 } from "@/lib/data";
 
-// Try to load from Firebase; fall back to empty arrays
 async function loadProjects(): Promise<Project[]> {
   try {
     const { fetchProjects } = await import("@/lib/firestore");
-    return await fetchProjects();
+    const fbData = await fetchProjects();
+    return fbData.length > 0 ? fbData : localProjects;
   } catch {
-    return [];
+    return localProjects;
   }
 }
 
@@ -49,9 +51,10 @@ async function loadSiteContent(): Promise<SiteContent> {
 async function loadExperience(): Promise<Experience[]> {
   try {
     const { fetchExperience } = await import("@/lib/firestore");
-    return await fetchExperience();
+    const fbData = await fetchExperience();
+    return fbData.length > 0 ? fbData : localExperience;
   } catch {
-    return [];
+    return localExperience;
   }
 }
 
@@ -67,9 +70,20 @@ async function loadEducation(): Promise<Education[]> {
 async function loadHackathons(): Promise<Hackathon[]> {
   try {
     const { fetchHackathons } = await import("@/lib/firestore");
-    return await fetchHackathons();
+    const fbData = await fetchHackathons();
+    return fbData.length > 0 ? fbData : localHackathons;
   } catch {
-    return [];
+    return localHackathons;
+  }
+}
+
+async function loadCodingProfiles(): Promise<CodingProfile[]> {
+  try {
+    const { fetchCodingProfiles } = await import("@/lib/firestore");
+    const fbData = await fetchCodingProfiles();
+    return fbData.length > 0 ? fbData : localCodingProfiles;
+  } catch {
+    return localCodingProfiles;
   }
 }
 
@@ -80,6 +94,7 @@ export default function HomePage() {
   const [experience, setExperience] = useState<Experience[]>([]);
   const [education, setEducation] = useState<Education[]>([]);
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
+  const [codingProfiles, setCodingProfiles] = useState<CodingProfile[]>([]);
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
 
   useEffect(() => {
@@ -89,6 +104,7 @@ export default function HomePage() {
     loadExperience().then(setExperience);
     loadEducation().then(setEducation);
     loadHackathons().then(setHackathons);
+    loadCodingProfiles().then(setCodingProfiles);
   }, []);
   return (
     <main>
@@ -106,6 +122,9 @@ export default function HomePage() {
 
       {/* Skills */}
       <SkillsSection />
+
+      {/* DSA Section */}
+      <DSASection dsaExperiences={localDSAExperience} codingProfiles={codingProfiles} />
 
       {/* Projects Section */}
       <section id="projects" className="py-24 px-6 sm:px-10">
@@ -139,9 +158,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Hackathons */}
-      <HackathonsSection data={hackathons} />
-
       {/* Certificates Section */}
       <section id="certificates" className="py-24 px-6 sm:px-10 bg-surface-container-low">
         <div className="max-w-7xl mx-auto">
@@ -171,6 +187,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Space & Astrophysics Section */}
+      <SpaceSection />
+
+      {/* Hackathons */}
+      <HackathonsSection data={hackathons} onClick={setSelectedCert} />
 
       {/* Contact */}
       <ContactSection />

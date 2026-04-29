@@ -9,33 +9,53 @@ import AdminSiteContentForm from "@/components/admin/AdminSiteContentForm";
 import AdminExperienceForm from "@/components/admin/AdminExperienceForm";
 import AdminEducationForm from "@/components/admin/AdminEducationForm";
 import AdminHackathonForm from "@/components/admin/AdminHackathonForm";
+import AdminCodingProfileForm from "@/components/admin/AdminCodingProfileForm";
+import { auth } from "@/lib/firebase";
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged, User } from "firebase/auth";
 import { 
-  localProjects, localCertificates, localExperience, localEducation, localHackathons,
-  type Project, type Certificate, type Experience, type Education, type Hackathon
+  localProjects, localCertificates, localExperience, localEducation, localHackathons, localCodingProfiles,
+  type Project, type Certificate, type Experience, type Education, type Hackathon, type CodingProfile
 } from "@/lib/data";
 
 export default function AdminPage() {
-  const [tab, setTab] = useState<"content" | "experience" | "education" | "hackathons" | "projects" | "certs">("content");
+  const [tab, setTab] = useState<"content" | "experience" | "education" | "hackathons" | "projects" | "certs" | "codingProfiles">("content");
   const [projects, setProjects] = useState<Project[]>([]);
   const [certs, setCerts] = useState<Certificate[]>([]);
   const [experience, setExperience] = useState<Experience[]>([]);
   const [education, setEducation] = useState<Education[]>([]);
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
+  const [codingProfiles, setCodingProfiles] = useState<CodingProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [firebaseOk, setFirebaseOk] = useState(false);
+
+  // Auth State
+  const [user, setUser] = useState<User | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (u) => {
+      setUser(u);
+      setAuthLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     async function load() {
       try {
-        const { fetchProjects, fetchCertificates, fetchExperience, fetchEducation, fetchHackathons } = await import("@/lib/firestore");
-        const [p, c, ex, ed, h] = await Promise.all([
-          fetchProjects(), fetchCertificates(), fetchExperience(), fetchEducation(), fetchHackathons()
+        const { fetchProjects, fetchCertificates, fetchExperience, fetchEducation, fetchHackathons, fetchCodingProfiles } = await import("@/lib/firestore");
+        const [p, c, ex, ed, h, cp] = await Promise.all([
+          fetchProjects(), fetchCertificates(), fetchExperience(), fetchEducation(), fetchHackathons(), fetchCodingProfiles()
         ]);
         setProjects(p);
         setCerts(c);
         setExperience(ex);
         setEducation(ed);
         setHackathons(h);
+        setCodingProfiles(cp);
         setFirebaseOk(true);
       } catch {
         setProjects([]);
@@ -43,6 +63,7 @@ export default function AdminPage() {
         setExperience([]);
         setEducation([]);
         setHackathons([]);
+        setCodingProfiles([]);
         setFirebaseOk(false);
       } finally {
         setLoading(false);
@@ -88,11 +109,98 @@ export default function AdminPage() {
         const { deleteHackathon } = await import("@/lib/firestore");
         await deleteHackathon(id);
         setHackathons((prev) => prev.filter((x) => x.id !== id));
+      } else if (type === "codingProfiles") {
+        const { deleteCodingProfile } = await import("@/lib/firestore");
+        await deleteCodingProfile(id);
+        setCodingProfiles((prev) => prev.filter((x) => x.id !== id));
       }
     } catch {
       alert("Delete failed.");
     }
   };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError("");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err: any) {
+      setLoginError("Invalid email or password. Check your Firebase console.");
+    }
+  };
+
+  const handleLogout = () => {
+    if (confirm("Are you sure you want to log out?")) {
+      signOut(auth);
+    }
+  };
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-surface-container-low flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-surface-container-low flex items-center justify-center px-4">
+        <div className="w-full max-w-md bg-soft-cream p-8 rounded-3xl border border-outline-variant/30 shadow-warm-lg">
+          <div className="text-center mb-8">
+            <Link href="/" className="font-label text-xs text-on-surface-variant/60 hover:text-primary transition-colors tracking-widest uppercase block mb-6">
+              ← Back to Portfolio
+            </Link>
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="material-symbols-outlined text-primary text-3xl">lock</span>
+            </div>
+            <h1 className="font-headline font-extrabold text-3xl text-coffee-brown tracking-tighter">
+              Admin Access
+            </h1>
+            <p className="font-body text-sm text-on-surface-variant mt-2">
+              Secure login required to edit portfolio data.
+            </p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-5">
+            {loginError && (
+              <div className="p-3 rounded-xl bg-error/10 border border-error/20 text-error font-body text-xs text-center">
+                {loginError}
+              </div>
+            )}
+            <div>
+              <label className="admin-label">Email Address</label>
+              <input 
+                type="email" 
+                required 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="admin-input" 
+                placeholder="admin@example.com"
+              />
+            </div>
+            <div>
+              <label className="admin-label">Password</label>
+              <input 
+                type="password" 
+                required 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="admin-input" 
+                placeholder="••••••••"
+              />
+            </div>
+            <button 
+              type="submit" 
+              className="w-full p-4 rounded-xl bg-coffee-brown text-white font-label tracking-widest uppercase text-xs hover:bg-coffee-brown/80 transition-colors shadow-warm-md mt-2"
+            >
+              Sign In to Dashboard
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-surface-container-low pt-24 pb-20 px-4 sm:px-8">
@@ -112,17 +220,53 @@ export default function AdminPage() {
           </div>
 
           {/* Firebase status */}
-          <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-label tracking-wide ${
-            firebaseOk ? "bg-green-50 text-green-700 border border-green-200" : "bg-amber-50 text-amber-700 border border-amber-200"
-          }`}>
-            <span className={`w-2 h-2 rounded-full ${firebaseOk ? "bg-green-500" : "bg-amber-500"}`} />
-            {firebaseOk ? "Firebase Connected" : "Using Local Data — Configure Firebase"}
+          <div className="flex flex-wrap items-center gap-3">
+            <button 
+              onClick={async () => {
+                try {
+                  const { addHackathon, addCertificate, fetchCertificates } = await import("@/lib/firestore");
+                  for (const h of localHackathons) {
+                    if (h.id !== "hck-isro") { // Skip the first one if already in firebase
+                      await addHackathon({ title: h.title, role: h.role, date: h.date, description: h.description, image: h.image });
+                    }
+                  }
+                  // Sync certificates safely
+                  const existingCerts = await fetchCertificates();
+                  for (const c of localCertificates) {
+                    if (!existingCerts.some(ec => ec.title === c.title)) {
+                      await addCertificate({ title: c.title, issuer: c.issuer, image: c.image, date: c.date });
+                    }
+                  }
+                  alert("Data successfully synced to Firebase! They will now appear in your Admin list.");
+                  window.location.reload();
+                } catch (e) {
+                  alert("Sync failed: " + e);
+                }
+              }}
+              className="px-4 py-2 bg-coffee-brown text-white rounded-full text-xs font-label tracking-wide hover:bg-coffee-brown/80 transition-colors shadow-warm-sm"
+            >
+              ⟳ Sync Local Data to Firebase
+            </button>
+
+            <button 
+              onClick={handleLogout}
+              className="px-4 py-2 bg-surface-container border border-outline-variant/30 text-coffee-brown rounded-full text-xs font-label tracking-wide hover:bg-outline-variant/30 transition-colors"
+            >
+              Sign Out
+            </button>
+
+            <div className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-label tracking-wide ${
+              firebaseOk ? "bg-green-50 text-green-700 border border-green-200" : "bg-amber-50 text-amber-700 border border-amber-200"
+            }`}>
+              <span className={`w-2 h-2 rounded-full ${firebaseOk ? "bg-green-500" : "bg-amber-500"}`} />
+              {firebaseOk ? "Firebase Connected" : "Using Local Data — Configure Firebase"}
+            </div>
           </div>
         </div>
 
         {/* Tabs */}
         <div className="flex flex-wrap bg-surface-container rounded-3xl p-1 gap-1 mb-8 shadow-warm-sm">
-          {(["content", "experience", "education", "hackathons", "projects", "certs"] as const).map((t) => (
+          {(["content", "experience", "education", "hackathons", "projects", "certs", "codingProfiles"] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
@@ -132,7 +276,7 @@ export default function AdminPage() {
                   : "text-on-surface-variant hover:text-coffee-brown hover:bg-surface-container-high"
               }`}
             >
-              {t === "projects" ? "Projects" : t === "certs" ? "Badges" : t === "content" ? "Site Bio" : t}
+              {t === "projects" ? "Projects" : t === "certs" ? "Badges" : t === "content" ? "Site Bio" : t === "codingProfiles" ? "DSA Profiles" : t}
             </button>
           ))}
         </div>
@@ -170,6 +314,11 @@ export default function AdminPage() {
                 {tab === "certs" && (
                   <motion.div key="cert-form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                     <AdminCertForm onAdded={(c) => setCerts((prev) => [c, ...prev])} />
+                  </motion.div>
+                )}
+                {tab === "codingProfiles" && (
+                  <motion.div key="cp-form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    <AdminCodingProfileForm onAdded={(cp) => setCodingProfiles((prev) => [cp, ...prev])} />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -322,13 +471,41 @@ export default function AdminPage() {
                         </button>
                       </motion.div>
                     ))}
+
+                    {tab === "codingProfiles" && codingProfiles.map((cp) => (
+                      <motion.div
+                        key={cp.id}
+                        initial={{ opacity: 0, x: 16 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -16 }}
+                        className="flex items-center gap-4 px-6 py-4 hover:bg-surface-container-low transition-colors group"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-headline font-bold text-sm text-coffee-brown truncate">{cp.platform}</h4>
+                          <p className="font-body text-xs text-on-surface-variant">{cp.handle}</p>
+                          <p className="font-label text-[10px] text-on-surface-variant/50 mt-0.5">{cp.stats}</p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <a href={cp.link} target="_blank" rel="noopener noreferrer" className="font-label text-[10px] text-primary hover:underline">
+                            Profile
+                          </a>
+                          <button
+                            onClick={() => handleDeleteItem("codingProfiles", cp.id)}
+                            className="px-3 py-1 rounded-full border border-error/30 text-error font-label text-[10px] hover:bg-error/10 transition-colors opacity-0 group-hover:opacity-100"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </motion.div>
+                    ))}
                   </AnimatePresence>
 
                   {((tab === "projects" && projects.length === 0) ||
                     (tab === "certs" && certs.length === 0) ||
                     (tab === "experience" && experience.length === 0) ||
                     (tab === "education" && education.length === 0) ||
-                    (tab === "hackathons" && hackathons.length === 0)
+                    (tab === "hackathons" && hackathons.length === 0) ||
+                    (tab === "codingProfiles" && codingProfiles.length === 0)
                   ) && (
                     <div className="flex items-center justify-center h-32 text-on-surface-variant/40 font-label text-sm">
                       No items yet. Add one using the form.

@@ -3,7 +3,7 @@
 import SectionWrapper from "./SectionWrapper";
 import type { Hackathon } from "@/lib/data";
 
-export default function HackathonsSection({ data }: { data: Hackathon[] }) {
+export default function HackathonsSection({ data, onClick }: { data: Hackathon[], onClick?: (item: any) => void }) {
   return (
     <section id="hackathons" className="py-24 px-6 sm:px-10">
       <div className="max-w-7xl mx-auto">
@@ -17,7 +17,11 @@ export default function HackathonsSection({ data }: { data: Hackathon[] }) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {data.map((hck, i) => (
-              <div key={i} className="flex flex-col rounded-3xl bg-surface-container-low border border-outline-variant/30 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-shadow group">
+              <div 
+                key={i} 
+                onClick={() => onClick && onClick({ id: hck.id, title: hck.title, issuer: "Hackathon / Workshop", image: hck.image || '', date: hck.date })}
+                className={`flex flex-col rounded-3xl bg-surface-container-low border border-outline-variant/30 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-shadow group ${onClick && hck.image ? 'cursor-pointer' : ''}`}
+              >
                 {hck.image ? (
                   <div className="h-48 overflow-hidden bg-surface-dim relative border-b border-outline-variant/30 flex items-center justify-center">
                     {/* eslint-disable-next-line @next/next/no-img-element */}

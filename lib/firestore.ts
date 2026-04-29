@@ -19,7 +19,8 @@ import type {
   Hackathon, 
   Experience, 
   Education, 
-  SiteContent 
+  SiteContent,
+  CodingProfile
 } from "./data";
 
 // ─── Projects ────────────────────────────────────────────────────────────────
@@ -134,4 +135,20 @@ export async function fetchSiteContent(): Promise<SiteContent | null> {
 
 export async function updateSiteContent(data: Partial<SiteContent>): Promise<void> {
   await setDoc(doc(db, "siteContent", "global"), data, { merge: true });
+}
+
+// ─── Coding Profiles ─────────────────────────────────────────────────────────
+
+export async function fetchCodingProfiles(): Promise<CodingProfile[]> {
+  const snap = await getDocs(query(collection(db, "codingProfiles"), orderBy("createdAt", "desc")));
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() } as CodingProfile));
+}
+
+export async function addCodingProfile(data: Omit<CodingProfile, "id">): Promise<string> {
+  const ref = await addDoc(collection(db, "codingProfiles"), { ...data, createdAt: serverTimestamp() });
+  return ref.id;
+}
+
+export async function deleteCodingProfile(id: string): Promise<void> {
+  await deleteDoc(doc(db, "codingProfiles", id));
 }
