@@ -15,6 +15,8 @@ const EMPTY = {
 
 export default function AdminProjectForm({ onAdded }: Props) {
   const [form, setForm] = useState(EMPTY);
+  const [file, setFile] = useState<File | null>(null);
+  const [fileKey, setFileKey] = useState(Date.now());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -25,11 +27,21 @@ export default function AdminProjectForm({ onAdded }: Props) {
     setLoading(true); setError(""); setSuccess("");
 
     try {
+      let imageUrl = form.image;
+      if (file) {
+        try {
+          imageUrl = await uploadImage(file, "projects");
+        } catch (storageErr: any) {
+          console.error(storageErr);
+          throw new Error("storage-failed: " + (storageErr.message || "Unknown error"));
+        }
+      }
+
       const techArr = form.tech.split(",").map((t) => t.trim()).filter(Boolean);
       const data = {
         title: form.title,
         description: form.description,
-        image: form.image,
+        image: imageUrl,
         tech: techArr,
         github: form.github,
         demo: form.demo,
@@ -38,9 +50,13 @@ export default function AdminProjectForm({ onAdded }: Props) {
       const id = await addProject(data);
       onAdded({ id, ...data });
       setForm(EMPTY);
+      setFile(null);
+      setFileKey(Date.now());
       setSuccess("Project added successfully!");
     } catch (err: any) {
-      if (err.message && err.message.includes("offline")) {
+      if (err.message && err.message.includes("storage-failed")) {
+        setError("Firebase Storage Error: Failed to upload the image file. Ensure Firebase Storage is enabled in your Firebase Console and that the Rules allow reads/writes.");
+      } else if (err.message && err.message.includes("offline")) {
         setError("Database Error: Client is offline. Your computer might be offline, or Firebase Firestore is not enabled (Step 2).");
       } else {
         setError("Failed to add project. Ensure Firestore is running in Test Mode.");
@@ -97,6 +113,22 @@ export default function AdminProjectForm({ onAdded }: Props) {
       </div>
 
       <div>
+        <label className="admin-label">Upload Project Image File</label>
+        <input 
+          key={fileKey}
+          type="file" 
+          accept="image/*"
+          className="admin-input" 
+          onChange={e => {
+            if (e.target.files && e.target.files[0]) {
+              setFile(e.target.files[0]);
+            }
+          }} 
+        />
+        <p className="text-[10px] text-on-surface-variant/50 mt-1">Or, paste an image URL below instead:</p>
+      </div>
+
+      <div>
         <label className="admin-label">Public Image URL (optional)</label>
         <input 
           className="admin-input" 
@@ -111,7 +143,7 @@ export default function AdminProjectForm({ onAdded }: Props) {
         disabled={loading}
         className="w-full py-3 rounded-full bg-primary text-white font-label font-semibold text-sm uppercase tracking-widest hover:brightness-110 transition-all disabled:opacity-50 shadow-warm-sm"
       >
-        {loading ? "Adding..." : "Add Project"}
+        {loading ? "Uploading & Adding..." : "Add Project"}
       </button>
     </form>
   );
