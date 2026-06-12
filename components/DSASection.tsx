@@ -98,7 +98,7 @@ export default function DSASection({
             <div className="relative group rounded-3xl overflow-hidden shadow-warm-lg border border-outline-variant/20 bg-surface-container">
               <div className="aspect-[4/3] w-full relative">
                 <Image
-                  src="/certificates/smartinterviews.png"
+                  src="/certificates/smartinterviews 2.png"
                   alt="SmartInterviews Certificate"
                   fill
                   className="object-contain p-4 group-hover:scale-105 transition-transform duration-700"

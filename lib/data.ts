@@ -204,14 +204,14 @@ export const localExperience: Experience[] = [
 export const localDSAExperience: Experience[] = [
   {
     id: "exp-smartinterviews",
-    role: "DSA Trainee",
+    role: "DSA Student",
     company: "SmartInterviews",
     period: "2+ Years",
     detail: "Underwent rigorous 2+ years of training in Data Structures and Algorithms. Solved hundreds of problems, optimizing code for time and space complexity, and participated in internal coding contests.",
   },
   {
     id: "exp-gradious",
-    role: "DSA Trainee",
+    role: "DSA Student",
     company: "Gradious",
     period: "1 Year",
     detail: "1 year of intensive training on the Gradious DSA platform. Focused on problem-solving techniques, algorithmic thinking, and competitive programming fundamentals.",
