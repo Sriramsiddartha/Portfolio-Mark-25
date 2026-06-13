@@ -166,3 +166,189 @@ body {
 ::-webkit-scrollbar-track { background: #F5EFE6; }
 ::-webkit-scrollbar-thumb { background: #d3c4b2; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #7c5816; }
+
+/* ═══════════════════════════════════════════════════════
+   IMMERSIVE SPACE SECTION
+   ═══════════════════════════════════════════════════════ */
+
+/* Starfield layer 1 — small distant stars */
+.space-stars-1 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: transparent;
+  box-shadow:
+    12px 45px 0 0 rgba(255,255,255,0.6),
+    87px 120px 0 0 rgba(255,255,255,0.4),
+    150px 80px 0 0 rgba(255,255,255,0.7),
+    230px 200px 0 0 rgba(255,255,255,0.3),
+    340px 30px 0 0 rgba(255,255,255,0.5),
+    420px 160px 0 0 rgba(255,255,255,0.6),
+    510px 90px 0 0 rgba(255,255,255,0.4),
+    600px 240px 0 0 rgba(255,255,255,0.7),
+    680px 50px 0 0 rgba(255,255,255,0.3),
+    760px 180px 0 0 rgba(255,255,255,0.6),
+    850px 110px 0 0 rgba(255,255,255,0.5),
+    940px 260px 0 0 rgba(255,255,255,0.4),
+    1020px 40px 0 0 rgba(255,255,255,0.7),
+    1100px 190px 0 0 rgba(255,255,255,0.3),
+    1200px 70px 0 0 rgba(255,255,255,0.6),
+    1280px 230px 0 0 rgba(255,255,255,0.5),
+    55px 300px 0 0 rgba(255,255,255,0.4),
+    180px 350px 0 0 rgba(255,255,255,0.6),
+    290px 420px 0 0 rgba(255,255,255,0.3),
+    410px 380px 0 0 rgba(255,255,255,0.7),
+    530px 450px 0 0 rgba(255,255,255,0.5),
+    650px 340px 0 0 rgba(255,255,255,0.4),
+    780px 410px 0 0 rgba(255,255,255,0.6),
+    890px 370px 0 0 rgba(255,255,255,0.3),
+    1010px 440px 0 0 rgba(255,255,255,0.7),
+    1140px 360px 0 0 rgba(255,255,255,0.5),
+    35px 520px 0 0 rgba(255,255,255,0.6),
+    160px 580px 0 0 rgba(255,255,255,0.4),
+    280px 550px 0 0 rgba(255,255,255,0.7),
+    390px 620px 0 0 rgba(255,255,255,0.3),
+    520px 570px 0 0 rgba(255,255,255,0.5),
+    640px 640px 0 0 rgba(255,255,255,0.6),
+    770px 590px 0 0 rgba(255,255,255,0.4),
+    900px 530px 0 0 rgba(255,255,255,0.7),
+    1050px 600px 0 0 rgba(255,255,255,0.3),
+    1180px 560px 0 0 rgba(255,255,255,0.5);
+  animation: spaceTwinkle1 4s ease-in-out infinite alternate;
+}
+
+/* Starfield layer 2 — medium brighter stars */
+.space-stars-2 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow:
+    70px 65px 0 1px rgba(200,220,255,0.8),
+    200px 150px 0 1px rgba(200,220,255,0.6),
+    350px 100px 0 1px rgba(200,220,255,0.9),
+    480px 220px 0 1px rgba(200,220,255,0.5),
+    620px 70px 0 1px rgba(200,220,255,0.7),
+    750px 200px 0 1px rgba(200,220,255,0.8),
+    900px 130px 0 1px rgba(200,220,255,0.6),
+    1060px 250px 0 1px rgba(200,220,255,0.9),
+    110px 380px 0 1px rgba(200,220,255,0.5),
+    260px 460px 0 1px rgba(200,220,255,0.7),
+    430px 350px 0 1px rgba(200,220,255,0.8),
+    570px 500px 0 1px rgba(200,220,255,0.6),
+    720px 430px 0 1px rgba(200,220,255,0.9),
+    870px 480px 0 1px rgba(200,220,255,0.5),
+    1020px 390px 0 1px rgba(200,220,255,0.7),
+    1190px 450px 0 1px rgba(200,220,255,0.8),
+    45px 600px 0 1px rgba(200,220,255,0.6),
+    300px 650px 0 1px rgba(200,220,255,0.9),
+    500px 580px 0 1px rgba(200,220,255,0.5),
+    700px 670px 0 1px rgba(200,220,255,0.7);
+  animation: spaceTwinkle2 6s ease-in-out infinite alternate;
+}
+
+/* Starfield layer 3 — rare bright stars */
+.space-stars-3 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow:
+    130px 90px 0 1.5px rgba(255,255,255,1),
+    450px 180px 0 1.5px rgba(255,255,255,0.9),
+    800px 60px 0 1.5px rgba(255,255,255,1),
+    1100px 210px 0 1.5px rgba(255,255,255,0.9),
+    300px 400px 0 1.5px rgba(255,255,255,1),
+    650px 480px 0 1.5px rgba(255,255,255,0.9),
+    950px 350px 0 1.5px rgba(255,255,255,1),
+    180px 600px 0 1.5px rgba(255,255,255,0.9),
+    560px 640px 0 1.5px rgba(255,255,255,1),
+    1000px 560px 0 1.5px rgba(255,255,255,0.9);
+  animation: spaceTwinkle3 3s ease-in-out infinite alternate;
+}
+
+/* Twinkling keyframes */
+@keyframes spaceTwinkle1 {
+  from { opacity: 0.4; }
+  to   { opacity: 1; }
+}
+@keyframes spaceTwinkle2 {
+  from { opacity: 0.6; }
+  to   { opacity: 0.3; }
+}
+@keyframes spaceTwinkle3 {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Shooting stars */
+.shooting-star {
+  position: absolute;
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.9), transparent);
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shooting-star-1 {
+  top: 12%;
+  left: -120px;
+  animation: shootingStar 4s ease-in 1s infinite;
+  transform: rotate(-25deg);
+}
+.shooting-star-2 {
+  top: 35%;
+  left: -120px;
+  animation: shootingStar 5s ease-in 3.5s infinite;
+  transform: rotate(-15deg);
+  width: 80px;
+}
+.shooting-star-3 {
+  top: 55%;
+  left: -120px;
+  animation: shootingStar 6s ease-in 6s infinite;
+  transform: rotate(-30deg);
+  width: 150px;
+}
+
+@keyframes shootingStar {
+  0%   { opacity: 0; transform: translateX(0) rotate(-25deg); }
+  5%   { opacity: 1; }
+  30%  { opacity: 0.6; }
+  70%  { opacity: 0; transform: translateX(calc(100vw + 200px)) rotate(-25deg); }
+  100% { opacity: 0; transform: translateX(calc(100vw + 200px)) rotate(-25deg); }
+}
+
+/* Floating satellite */
+.space-satellite {
+  position: absolute;
+  top: 20%;
+  left: -60px;
+  width: 40px;
+  height: 40px;
+  opacity: 0.25;
+  pointer-events: none;
+  animation: floatSatellite 25s linear infinite;
+}
+
+@keyframes floatSatellite {
+  0%   { left: -60px; top: 25%; transform: rotate(0deg); opacity: 0; }
+  5%   { opacity: 0.25; }
+  50%  { top: 18%; opacity: 0.35; }
+  95%  { opacity: 0.25; }
+  100% { left: calc(100% + 60px); top: 30%; transform: rotate(360deg); opacity: 0; }
+}
+
+/* Dark glassmorphism card */
+.space-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.3s ease;
+}
+.space-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(100,180,255,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 60px rgba(100,180,255,0.05);
+}
