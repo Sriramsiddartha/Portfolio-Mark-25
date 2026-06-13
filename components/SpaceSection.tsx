@@ -32,12 +32,27 @@ export default function SpaceSection() {
     <section 
       id="space-research" 
       className="relative py-32 sm:py-40 px-6 sm:px-10 overflow-hidden" 
-      style={{ background: "#050508" }}
+      style={{ background: "#030305" }}
     >
       
+      {/* ═══ Video Background: Gargantua Black Hole ═══ */}
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline 
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
+      >
+        <source src="/gargantua.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark vignette overlay over video to keep text highly readable */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030305] via-transparent to-[#030305] pointer-events-none opacity-80" />
+
       {/* ═══ Animated Background Layers ═══ */}
       
-      {/* Starfields (width/height 1px is set in CSS, but let's ensure no layout issues) */}
+      {/* Starfields */}
       <div className="space-stars-1 pointer-events-none" />
       <div className="space-stars-2 pointer-events-none" />
       <div className="space-stars-3 pointer-events-none" />
@@ -47,13 +62,13 @@ export default function SpaceSection() {
       <div className="pulse-star" style={{ top: "45%", left: "75%" }} />
       <div className="pulse-star" style={{ top: "75%", left: "25%" }} />
 
-      {/* Shooting stars (now moving right-to-left) */}
+      {/* Shooting stars (moving right-to-left) */}
       <div className="shooting-star shooting-star-1 pointer-events-none" />
       <div className="shooting-star shooting-star-2 pointer-events-none" />
       <div className="shooting-star shooting-star-3 pointer-events-none" />
       <div className="shooting-star shooting-star-4 pointer-events-none" />
 
-      {/* Floating satellite SVG (scaled up to 100px in CSS) */}
+      {/* Floating satellite SVG (scaled up to 100px) */}
       <div className="space-satellite pointer-events-none">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
           {/* Solar panels */}
@@ -90,9 +105,8 @@ export default function SpaceSection() {
       {/* Nebula glows */}
       <div className="absolute top-20 -left-32 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)", filter: "blur(80px)" }} />
       <div className="absolute bottom-20 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)", filter: "blur(80px)" }} />
-      <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(236,72,153,0.03) 0%, transparent 70%)", filter: "blur(100px)" }} />
 
-      {/* Constellation background overlay line (just a cool subtle line pattern) */}
+      {/* Constellation background overlay lines */}
       <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
         <line x1="15%" y1="15%" x2="20%" y2="28%" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="3 3" />
         <line x1="20%" y1="28%" x2="15%" y2="45%" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="3 3" />
