@@ -7,14 +7,14 @@ import { SiLeetcode, SiCodeforces, SiHackerrank, SiCodechef } from "react-icons/
 import { FaLaptopCode } from "react-icons/fa";
 import Image from "next/image";
 
-export default function DSASection({ 
-  dsaExperiences, 
-  codingProfiles 
-}: { 
-  dsaExperiences: Experience[], 
-  codingProfiles: CodingProfile[] 
+export default function DSASection({
+  dsaExperiences,
+  codingProfiles
+}: {
+  dsaExperiences: Experience[],
+  codingProfiles: CodingProfile[]
 }) {
-  
+
   const getIcon = (platform: string) => {
     const p = platform.toLowerCase();
     if (p.includes("leetcode")) return <SiLeetcode className="w-6 h-6" />;
@@ -98,7 +98,8 @@ export default function DSASection({
             <div className="relative group rounded-3xl overflow-hidden shadow-warm-lg border border-outline-variant/20 bg-surface-container">
               <div className="aspect-[4/3] w-full relative">
                 <Image
-                  src="/certificates/smartinterviews 2.png"
+                  src="/certificates/smartinterviews2.png"
+
                   alt="SmartInterviews Certificate"
                   fill
                   className="object-contain p-4 group-hover:scale-105 transition-transform duration-700"

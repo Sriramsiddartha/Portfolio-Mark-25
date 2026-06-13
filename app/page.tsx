@@ -14,6 +14,7 @@ import ContactSection from "@/components/ContactSection";
 import SectionWrapper from "@/components/SectionWrapper";
 import DSASection from "@/components/DSASection";
 import SpaceSection from "@/components/SpaceSection";
+import ResearchSection from "@/components/ResearchSection";
 import { 
   localProjects, localCertificates, localSiteContent, localExperience, localEducation, localHackathons, localCodingProfiles, localDSAExperience,
   type Project, type Certificate, type SiteContent, type Experience, type Education, type Hackathon, type CodingProfile 
@@ -157,6 +158,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Research & Publications */}
+      <ResearchSection />
 
       {/* Certificates Section */}
       <section id="certificates" className="py-24 px-6 sm:px-10 bg-surface-container-low">
