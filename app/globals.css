@@ -174,181 +174,311 @@ body {
 /* Starfield layer 1 — small distant stars */
 .space-stars-1 {
   position: absolute;
-  inset: 0;
+  width: 1px;
+  height: 1px;
+  top: 0;
+  left: 0;
   pointer-events: none;
   background: transparent;
   box-shadow:
-    12px 45px 0 0 rgba(255,255,255,0.6),
-    87px 120px 0 0 rgba(255,255,255,0.4),
-    150px 80px 0 0 rgba(255,255,255,0.7),
-    230px 200px 0 0 rgba(255,255,255,0.3),
-    340px 30px 0 0 rgba(255,255,255,0.5),
-    420px 160px 0 0 rgba(255,255,255,0.6),
-    510px 90px 0 0 rgba(255,255,255,0.4),
-    600px 240px 0 0 rgba(255,255,255,0.7),
-    680px 50px 0 0 rgba(255,255,255,0.3),
-    760px 180px 0 0 rgba(255,255,255,0.6),
-    850px 110px 0 0 rgba(255,255,255,0.5),
-    940px 260px 0 0 rgba(255,255,255,0.4),
-    1020px 40px 0 0 rgba(255,255,255,0.7),
-    1100px 190px 0 0 rgba(255,255,255,0.3),
-    1200px 70px 0 0 rgba(255,255,255,0.6),
-    1280px 230px 0 0 rgba(255,255,255,0.5),
-    55px 300px 0 0 rgba(255,255,255,0.4),
-    180px 350px 0 0 rgba(255,255,255,0.6),
-    290px 420px 0 0 rgba(255,255,255,0.3),
-    410px 380px 0 0 rgba(255,255,255,0.7),
-    530px 450px 0 0 rgba(255,255,255,0.5),
-    650px 340px 0 0 rgba(255,255,255,0.4),
-    780px 410px 0 0 rgba(255,255,255,0.6),
-    890px 370px 0 0 rgba(255,255,255,0.3),
-    1010px 440px 0 0 rgba(255,255,255,0.7),
-    1140px 360px 0 0 rgba(255,255,255,0.5),
-    35px 520px 0 0 rgba(255,255,255,0.6),
-    160px 580px 0 0 rgba(255,255,255,0.4),
-    280px 550px 0 0 rgba(255,255,255,0.7),
-    390px 620px 0 0 rgba(255,255,255,0.3),
-    520px 570px 0 0 rgba(255,255,255,0.5),
-    640px 640px 0 0 rgba(255,255,255,0.6),
-    770px 590px 0 0 rgba(255,255,255,0.4),
-    900px 530px 0 0 rgba(255,255,255,0.7),
-    1050px 600px 0 0 rgba(255,255,255,0.3),
-    1180px 560px 0 0 rgba(255,255,255,0.5);
+    12px 45px 0 0 rgba(255,255,255,0.5),
+    87px 120px 0 0 rgba(255,255,255,0.3),
+    150px 80px 0 0 rgba(255,255,255,0.6),
+    230px 200px 0 0 rgba(255,255,255,0.25),
+    340px 30px 0 0 rgba(255,255,255,0.4),
+    420px 160px 0 0 rgba(255,255,255,0.5),
+    510px 90px 0 0 rgba(255,255,255,0.3),
+    600px 240px 0 0 rgba(255,255,255,0.6),
+    680px 50px 0 0 rgba(255,255,255,0.25),
+    760px 180px 0 0 rgba(255,255,255,0.5),
+    850px 110px 0 0 rgba(255,255,255,0.4),
+    940px 260px 0 0 rgba(255,255,255,0.3),
+    1020px 40px 0 0 rgba(255,255,255,0.6),
+    1100px 190px 0 0 rgba(255,255,255,0.25),
+    1200px 70px 0 0 rgba(255,255,255,0.5),
+    1280px 230px 0 0 rgba(255,255,255,0.4),
+    1380px 90px 0 0 rgba(255,255,255,0.5),
+    1450px 200px 0 0 rgba(255,255,255,0.3),
+    55px 300px 0 0 rgba(255,255,255,0.3),
+    180px 350px 0 0 rgba(255,255,255,0.5),
+    290px 420px 0 0 rgba(255,255,255,0.25),
+    410px 380px 0 0 rgba(255,255,255,0.6),
+    530px 450px 0 0 rgba(255,255,255,0.4),
+    650px 340px 0 0 rgba(255,255,255,0.3),
+    780px 410px 0 0 rgba(255,255,255,0.5),
+    890px 370px 0 0 rgba(255,255,255,0.25),
+    1010px 440px 0 0 rgba(255,255,255,0.6),
+    1140px 360px 0 0 rgba(255,255,255,0.4),
+    1300px 400px 0 0 rgba(255,255,255,0.3),
+    1420px 330px 0 0 rgba(255,255,255,0.5),
+    35px 520px 0 0 rgba(255,255,255,0.5),
+    160px 580px 0 0 rgba(255,255,255,0.3),
+    280px 550px 0 0 rgba(255,255,255,0.6),
+    390px 620px 0 0 rgba(255,255,255,0.25),
+    520px 570px 0 0 rgba(255,255,255,0.4),
+    640px 640px 0 0 rgba(255,255,255,0.5),
+    770px 590px 0 0 rgba(255,255,255,0.3),
+    900px 530px 0 0 rgba(255,255,255,0.6),
+    1050px 600px 0 0 rgba(255,255,255,0.25),
+    1180px 560px 0 0 rgba(255,255,255,0.4),
+    1350px 580px 0 0 rgba(255,255,255,0.5),
+    70px 720px 0 0 rgba(255,255,255,0.3),
+    220px 760px 0 0 rgba(255,255,255,0.5),
+    400px 700px 0 0 rgba(255,255,255,0.4),
+    580px 780px 0 0 rgba(255,255,255,0.25),
+    730px 730px 0 0 rgba(255,255,255,0.6),
+    900px 760px 0 0 rgba(255,255,255,0.3),
+    1070px 710px 0 0 rgba(255,255,255,0.5),
+    1250px 750px 0 0 rgba(255,255,255,0.4),
+    130px 860px 0 0 rgba(255,255,255,0.5),
+    350px 890px 0 0 rgba(255,255,255,0.3),
+    550px 850px 0 0 rgba(255,255,255,0.6),
+    800px 880px 0 0 rgba(255,255,255,0.4),
+    1000px 840px 0 0 rgba(255,255,255,0.25),
+    1200px 870px 0 0 rgba(255,255,255,0.5);
   animation: spaceTwinkle1 4s ease-in-out infinite alternate;
 }
 
 /* Starfield layer 2 — medium brighter stars */
 .space-stars-2 {
   position: absolute;
-  inset: 0;
+  width: 1px;
+  height: 1px;
+  top: 0;
+  left: 0;
   pointer-events: none;
+  background: transparent;
   box-shadow:
-    70px 65px 0 1px rgba(200,220,255,0.8),
-    200px 150px 0 1px rgba(200,220,255,0.6),
-    350px 100px 0 1px rgba(200,220,255,0.9),
-    480px 220px 0 1px rgba(200,220,255,0.5),
-    620px 70px 0 1px rgba(200,220,255,0.7),
-    750px 200px 0 1px rgba(200,220,255,0.8),
-    900px 130px 0 1px rgba(200,220,255,0.6),
-    1060px 250px 0 1px rgba(200,220,255,0.9),
-    110px 380px 0 1px rgba(200,220,255,0.5),
-    260px 460px 0 1px rgba(200,220,255,0.7),
-    430px 350px 0 1px rgba(200,220,255,0.8),
-    570px 500px 0 1px rgba(200,220,255,0.6),
-    720px 430px 0 1px rgba(200,220,255,0.9),
-    870px 480px 0 1px rgba(200,220,255,0.5),
-    1020px 390px 0 1px rgba(200,220,255,0.7),
-    1190px 450px 0 1px rgba(200,220,255,0.8),
-    45px 600px 0 1px rgba(200,220,255,0.6),
-    300px 650px 0 1px rgba(200,220,255,0.9),
-    500px 580px 0 1px rgba(200,220,255,0.5),
-    700px 670px 0 1px rgba(200,220,255,0.7);
+    70px 65px 0 0.5px rgba(200,220,255,0.7),
+    200px 150px 0 0.5px rgba(200,220,255,0.5),
+    350px 100px 0 0.5px rgba(200,220,255,0.8),
+    480px 220px 0 0.5px rgba(200,220,255,0.4),
+    620px 70px 0 0.5px rgba(200,220,255,0.6),
+    750px 200px 0 0.5px rgba(200,220,255,0.7),
+    900px 130px 0 0.5px rgba(200,220,255,0.5),
+    1060px 250px 0 0.5px rgba(200,220,255,0.8),
+    1250px 150px 0 0.5px rgba(200,220,255,0.6),
+    110px 380px 0 0.5px rgba(200,220,255,0.4),
+    260px 460px 0 0.5px rgba(200,220,255,0.6),
+    430px 350px 0 0.5px rgba(200,220,255,0.7),
+    570px 500px 0 0.5px rgba(200,220,255,0.5),
+    720px 430px 0 0.5px rgba(200,220,255,0.8),
+    870px 480px 0 0.5px rgba(200,220,255,0.4),
+    1020px 390px 0 0.5px rgba(200,220,255,0.6),
+    1190px 450px 0 0.5px rgba(200,220,255,0.7),
+    45px 600px 0 0.5px rgba(200,220,255,0.5),
+    300px 650px 0 0.5px rgba(200,220,255,0.8),
+    500px 580px 0 0.5px rgba(200,220,255,0.4),
+    700px 670px 0 0.5px rgba(200,220,255,0.6),
+    950px 630px 0 0.5px rgba(200,220,255,0.7),
+    1100px 680px 0 0.5px rgba(200,220,255,0.5),
+    150px 750px 0 0.5px rgba(200,220,255,0.4),
+    400px 800px 0 0.5px rgba(200,220,255,0.6),
+    650px 760px 0 0.5px rgba(200,220,255,0.8),
+    880px 810px 0 0.5px rgba(200,220,255,0.5),
+    1050px 780px 0 0.5px rgba(200,220,255,0.7);
   animation: spaceTwinkle2 6s ease-in-out infinite alternate;
 }
 
-/* Starfield layer 3 — rare bright stars */
+/* Starfield layer 3 — rare bright pulsing stars */
 .space-stars-3 {
   position: absolute;
-  inset: 0;
+  width: 1px;
+  height: 1px;
+  top: 0;
+  left: 0;
   pointer-events: none;
+  background: transparent;
   box-shadow:
-    130px 90px 0 1.5px rgba(255,255,255,1),
-    450px 180px 0 1.5px rgba(255,255,255,0.9),
-    800px 60px 0 1.5px rgba(255,255,255,1),
-    1100px 210px 0 1.5px rgba(255,255,255,0.9),
-    300px 400px 0 1.5px rgba(255,255,255,1),
-    650px 480px 0 1.5px rgba(255,255,255,0.9),
-    950px 350px 0 1.5px rgba(255,255,255,1),
-    180px 600px 0 1.5px rgba(255,255,255,0.9),
-    560px 640px 0 1.5px rgba(255,255,255,1),
-    1000px 560px 0 1.5px rgba(255,255,255,0.9);
+    130px 90px 0 1px rgba(255,255,255,1),
+    450px 180px 0 1px rgba(255,255,255,0.9),
+    800px 60px 0 1px rgba(255,255,255,1),
+    1100px 210px 0 1px rgba(255,255,255,0.9),
+    300px 400px 0 1px rgba(255,255,255,1),
+    650px 480px 0 1px rgba(255,255,255,0.9),
+    950px 350px 0 1px rgba(255,255,255,1),
+    180px 650px 0 1px rgba(255,255,255,0.9),
+    560px 700px 0 1px rgba(255,255,255,1),
+    1000px 620px 0 1px rgba(255,255,255,0.9),
+    400px 820px 0 1px rgba(255,255,255,1),
+    750px 870px 0 1px rgba(255,255,255,0.9);
   animation: spaceTwinkle3 3s ease-in-out infinite alternate;
 }
 
 /* Twinkling keyframes */
 @keyframes spaceTwinkle1 {
-  from { opacity: 0.4; }
-  to   { opacity: 1; }
+  from { opacity: 0.3; }
+  to   { opacity: 0.9; }
 }
 @keyframes spaceTwinkle2 {
-  from { opacity: 0.6; }
-  to   { opacity: 0.3; }
+  from { opacity: 0.5; }
+  to   { opacity: 0.2; }
 }
 @keyframes spaceTwinkle3 {
   from { opacity: 1; transform: scale(1); }
-  to   { opacity: 0.5; transform: scale(0.8); }
+  to   { opacity: 0.4; transform: scale(0.6); }
 }
 
-/* Shooting stars */
+/* ── Shooting stars (right-to-left, like real meteors) ── */
 .shooting-star {
   position: absolute;
-  width: 120px;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.9), transparent);
+  height: 1.5px;
   border-radius: 999px;
   opacity: 0;
   pointer-events: none;
 }
 
 .shooting-star-1 {
-  top: 12%;
-  left: -120px;
-  animation: shootingStar 4s ease-in 1s infinite;
-  transform: rotate(-25deg);
+  top: 10%;
+  right: -200px;
+  width: 180px;
+  background: linear-gradient(270deg, transparent, rgba(255,255,255,0.8) 40%, rgba(180,210,255,0.9));
+  animation: shootStar1 5s ease-in 1.5s infinite;
 }
 .shooting-star-2 {
-  top: 35%;
-  left: -120px;
-  animation: shootingStar 5s ease-in 3.5s infinite;
-  transform: rotate(-15deg);
-  width: 80px;
+  top: 30%;
+  right: -150px;
+  width: 120px;
+  background: linear-gradient(270deg, transparent, rgba(255,255,255,0.7) 40%, rgba(180,210,255,0.8));
+  animation: shootStar2 7s ease-in 4s infinite;
 }
 .shooting-star-3 {
-  top: 55%;
-  left: -120px;
-  animation: shootingStar 6s ease-in 6s infinite;
-  transform: rotate(-30deg);
-  width: 150px;
+  top: 50%;
+  right: -180px;
+  width: 200px;
+  background: linear-gradient(270deg, transparent, rgba(255,255,255,0.6) 40%, rgba(200,220,255,0.8));
+  animation: shootStar3 6s ease-in 7s infinite;
+}
+.shooting-star-4 {
+  top: 70%;
+  right: -120px;
+  width: 100px;
+  background: linear-gradient(270deg, transparent, rgba(255,255,255,0.7) 40%, rgba(180,210,255,0.8));
+  animation: shootStar4 8s ease-in 2.5s infinite;
 }
 
-@keyframes shootingStar {
-  0%   { opacity: 0; transform: translateX(0) rotate(-25deg); }
-  5%   { opacity: 1; }
+@keyframes shootStar1 {
+  0%   { right: -200px; opacity: 0; transform: rotate(20deg); }
+  3%   { opacity: 1; }
+  25%  { opacity: 0.7; }
+  50%  { right: calc(100% + 200px); opacity: 0; transform: rotate(20deg); }
+  100% { right: calc(100% + 200px); opacity: 0; }
+}
+@keyframes shootStar2 {
+  0%   { right: -150px; opacity: 0; transform: rotate(15deg); }
+  3%   { opacity: 0.9; }
+  25%  { opacity: 0.5; }
+  45%  { right: calc(100% + 150px); opacity: 0; transform: rotate(15deg); }
+  100% { right: calc(100% + 150px); opacity: 0; }
+}
+@keyframes shootStar3 {
+  0%   { right: -180px; opacity: 0; transform: rotate(25deg); }
+  3%   { opacity: 1; }
   30%  { opacity: 0.6; }
-  70%  { opacity: 0; transform: translateX(calc(100vw + 200px)) rotate(-25deg); }
-  100% { opacity: 0; transform: translateX(calc(100vw + 200px)) rotate(-25deg); }
+  55%  { right: calc(100% + 180px); opacity: 0; transform: rotate(25deg); }
+  100% { right: calc(100% + 180px); opacity: 0; }
+}
+@keyframes shootStar4 {
+  0%   { right: -120px; opacity: 0; transform: rotate(12deg); }
+  2%   { opacity: 0.8; }
+  20%  { opacity: 0.5; }
+  40%  { right: calc(100% + 120px); opacity: 0; transform: rotate(12deg); }
+  100% { right: calc(100% + 120px); opacity: 0; }
 }
 
-/* Floating satellite */
+/* ── Floating satellite (bigger, more visible) ── */
 .space-satellite {
   position: absolute;
-  top: 20%;
-  left: -60px;
-  width: 40px;
-  height: 40px;
-  opacity: 0.25;
+  top: 15%;
+  right: -120px;
+  width: 100px;
+  height: 100px;
+  opacity: 0;
   pointer-events: none;
-  animation: floatSatellite 25s linear infinite;
+  animation: floatSatellite 30s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(100,180,255,0.3));
 }
 
 @keyframes floatSatellite {
-  0%   { left: -60px; top: 25%; transform: rotate(0deg); opacity: 0; }
-  5%   { opacity: 0.25; }
-  50%  { top: 18%; opacity: 0.35; }
-  95%  { opacity: 0.25; }
-  100% { left: calc(100% + 60px); top: 30%; transform: rotate(360deg); opacity: 0; }
+  0%   { right: -120px; top: 18%; transform: rotate(0deg); opacity: 0; }
+  3%   { opacity: 0.5; }
+  25%  { top: 25%; }
+  50%  { top: 15%; opacity: 0.6; }
+  75%  { top: 22%; }
+  97%  { opacity: 0.5; }
+  100% { right: calc(100% + 120px); top: 20%; transform: rotate(360deg); opacity: 0; }
 }
 
-/* Dark glassmorphism card */
+/* ── Earth horizon glow ── */
+.earth-horizon {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 120px;
+  border-radius: 50% 50% 0 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(30,120,255,0.08) 0%, rgba(30,120,255,0.03) 40%, transparent 70%);
+  pointer-events: none;
+}
+.earth-horizon::before {
+  content: '';
+  position: absolute;
+  bottom: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(80,160,255,0.15) 20%, rgba(80,160,255,0.25) 50%, rgba(80,160,255,0.15) 80%, transparent);
+}
+
+/* ── Pulsing bright star ── */
+.pulse-star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+  pointer-events: none;
+  animation: pulseStar 2.5s ease-in-out infinite;
+}
+.pulse-star::before,
+.pulse-star::after {
+  content: '';
+  position: absolute;
+  background: rgba(255,255,255,0.4);
+  border-radius: 999px;
+}
+.pulse-star::before {
+  width: 20px;
+  height: 1px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.pulse-star::after {
+  width: 1px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes pulseStar {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%      { transform: scale(1.8); opacity: 1; }
+}
+
+/* ── Dark glassmorphism card ── */
 .space-card {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.4s ease;
 }
 .space-card:hover {
-  background: rgba(255,255,255,0.07);
-  border-color: rgba(100,180,255,0.2);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 60px rgba(100,180,255,0.05);
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(100,180,255,0.15);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 80px rgba(100,180,255,0.04);
 }

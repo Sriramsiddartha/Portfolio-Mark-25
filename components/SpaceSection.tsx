@@ -29,54 +29,87 @@ export default function SpaceSection() {
   ];
 
   return (
-    <section id="space-research" className="relative py-24 px-6 sm:px-10 overflow-hidden" style={{ background: "linear-gradient(180deg, #0a0a1a 0%, #0d1117 40%, #1a0a2e 100%)" }}>
+    <section 
+      id="space-research" 
+      className="relative py-32 sm:py-40 px-6 sm:px-10 overflow-hidden" 
+      style={{ background: "#050508" }}
+    >
       
       {/* ═══ Animated Background Layers ═══ */}
       
-      {/* Starfield */}
-      <div className="space-stars-1" />
-      <div className="space-stars-2" />
-      <div className="space-stars-3" />
+      {/* Starfields (width/height 1px is set in CSS, but let's ensure no layout issues) */}
+      <div className="space-stars-1 pointer-events-none" />
+      <div className="space-stars-2 pointer-events-none" />
+      <div className="space-stars-3 pointer-events-none" />
 
-      {/* Shooting stars */}
-      <div className="shooting-star shooting-star-1" />
-      <div className="shooting-star shooting-star-2" />
-      <div className="shooting-star shooting-star-3" />
+      {/* Pulsing Bright Stars */}
+      <div className="pulse-star" style={{ top: "15%", left: "15%" }} />
+      <div className="pulse-star" style={{ top: "45%", left: "75%" }} />
+      <div className="pulse-star" style={{ top: "75%", left: "25%" }} />
 
-      {/* Floating satellite SVG */}
-      <div className="space-satellite">
+      {/* Shooting stars (now moving right-to-left) */}
+      <div className="shooting-star shooting-star-1 pointer-events-none" />
+      <div className="shooting-star shooting-star-2 pointer-events-none" />
+      <div className="shooting-star shooting-star-3 pointer-events-none" />
+      <div className="shooting-star shooting-star-4 pointer-events-none" />
+
+      {/* Floating satellite SVG (scaled up to 100px in CSS) */}
+      <div className="space-satellite pointer-events-none">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
           {/* Solar panels */}
-          <rect x="2" y="26" width="18" height="12" rx="2" fill="#4a90d9" opacity="0.6" />
-          <rect x="44" y="26" width="18" height="12" rx="2" fill="#4a90d9" opacity="0.6" />
-          {/* Panel lines */}
-          <line x1="8" y1="26" x2="8" y2="38" stroke="#6ab0ff" strokeWidth="0.5" opacity="0.4" />
-          <line x1="14" y1="26" x2="14" y2="38" stroke="#6ab0ff" strokeWidth="0.5" opacity="0.4" />
-          <line x1="50" y1="26" x2="50" y2="38" stroke="#6ab0ff" strokeWidth="0.5" opacity="0.4" />
-          <line x1="56" y1="26" x2="56" y2="38" stroke="#6ab0ff" strokeWidth="0.5" opacity="0.4" />
-          {/* Body */}
-          <rect x="22" y="22" width="20" height="20" rx="4" fill="#c0c8d4" opacity="0.7" />
-          <rect x="26" y="26" width="12" height="12" rx="2" fill="#8ab4f8" opacity="0.5" />
-          {/* Antenna */}
-          <line x1="32" y1="22" x2="32" y2="14" stroke="#e0e0e0" strokeWidth="1.5" opacity="0.5" />
-          <circle cx="32" cy="12" r="2" fill="#ff6b6b" opacity="0.6" />
+          <rect x="2" y="26" width="18" height="12" rx="2" fill="#4a90d9" opacity="0.75" />
+          <rect x="44" y="26" width="18" height="12" rx="2" fill="#4a90d9" opacity="0.75" />
+          {/* Panel grid lines */}
+          <line x1="8" y1="26" x2="8" y2="38" stroke="#ffffff" strokeWidth="0.5" opacity="0.5" />
+          <line x1="14" y1="26" x2="14" y2="38" stroke="#ffffff" strokeWidth="0.5" opacity="0.5" />
+          <line x1="50" y1="26" x2="50" y2="38" stroke="#ffffff" strokeWidth="0.5" opacity="0.5" />
+          <line x1="56" y1="26" x2="56" y2="38" stroke="#ffffff" strokeWidth="0.5" opacity="0.5" />
+          <line x1="2" y1="32" x2="20" y2="32" stroke="#ffffff" strokeWidth="0.5" opacity="0.5" />
+          <line x1="44" y1="32" x2="62" y2="32" stroke="#ffffff" strokeWidth="0.5" opacity="0.5" />
+          {/* Connecting struts */}
+          <rect x="18" y="30" width="6" height="4" fill="#888888" />
+          <rect x="40" y="30" width="6" height="4" fill="#888888" />
+          {/* Main Body */}
+          <rect x="22" y="22" width="20" height="20" rx="3" fill="#d0d5dd" />
+          {/* Gold foil details */}
+          <rect x="25" y="25" width="14" height="14" rx="1" fill="#cca43b" />
+          <circle cx="32" cy="32" r="4" fill="#111111" />
+          {/* Instrument details */}
+          <circle cx="28" cy="28" r="1.5" fill="#3b82f6" />
+          <circle cx="36" cy="28" r="1.5" fill="#10b981" />
+          {/* Transmitter Dish */}
+          <path d="M 24 16 C 28 22, 36 22, 40 16" stroke="#d0d5dd" strokeWidth="2" fill="none" />
+          <line x1="32" y1="20" x2="32" y2="10" stroke="#d0d5dd" strokeWidth="1.5" />
+          <circle cx="32" cy="8" r="2" fill="#ef4444" />
         </svg>
       </div>
 
-      {/* Nebula glow effects */}
-      <div className="absolute top-20 -left-32 w-96 h-96 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(100,60,180,0.12) 0%, transparent 70%)", filter: "blur(60px)" }} />
-      <div className="absolute bottom-20 -right-32 w-80 h-80 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(40,100,200,0.10) 0%, transparent 70%)", filter: "blur(60px)" }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(80,40,160,0.06) 0%, transparent 60%)", filter: "blur(80px)" }} />
+      {/* Earth Horizon Curve at bottom */}
+      <div className="earth-horizon pointer-events-none" />
+
+      {/* Nebula glows */}
+      <div className="absolute top-20 -left-32 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)", filter: "blur(80px)" }} />
+      <div className="absolute bottom-20 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)", filter: "blur(80px)" }} />
+      <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(236,72,153,0.03) 0%, transparent 70%)", filter: "blur(100px)" }} />
+
+      {/* Constellation background overlay line (just a cool subtle line pattern) */}
+      <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="15%" y1="15%" x2="20%" y2="28%" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="3 3" />
+        <line x1="20%" y1="28%" x2="15%" y2="45%" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="3 3" />
+        <line x1="20%" y1="28%" x2="35%" y2="25%" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="3 3" />
+        <line x1="75%" y1="45%" x2="80%" y2="60%" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="3 3" />
+        <line x1="80%" y1="60%" x2="70%" y2="75%" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="3 3" />
+      </svg>
 
       {/* ═══ Content ═══ */}
       <div className="max-w-7xl mx-auto relative z-10">
         <SectionWrapper>
-          <div className="text-center mb-16">
+          <div className="text-center mb-20">
             <span className="font-label text-xs uppercase tracking-[0.3em] text-blue-400 mb-4 block">Beyond Software</span>
             <h2 className="font-headline font-extrabold text-4xl sm:text-5xl tracking-tighter text-white flex items-center justify-center gap-4">
               Astrophysics & Space Tech <SiNasa className="text-blue-400 w-10 h-10" />
             </h2>
-            <p className="font-body text-base text-white/60 max-w-2xl mx-auto mt-4 leading-relaxed">
+            <p className="font-body text-base text-white/70 max-w-2xl mx-auto mt-4 leading-relaxed">
               My passion extends beyond code into the cosmos. I actively research theoretical physics, apply machine learning to astrophysics, and build space-tech software.
             </p>
           </div>
